@@ -4,8 +4,6 @@ A web application that lets you search for songs based on Spotify’s song class
 
 ## Technologies
 
----
-
 - React
 - Node
 - Express
@@ -17,7 +15,5 @@ A web application that lets you search for songs based on Spotify’s song class
 - OAuth 2.0
 
 ## Screenshots
-
----
 
 ![Demo](./client/img/demo-screenshot.png)
