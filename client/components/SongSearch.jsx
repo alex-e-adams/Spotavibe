@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
-import Track from './Track';
 import { useOutletContext } from 'react-router-dom';
+import Track from './Track';
 
 export default function SongSearch(props) {
   const [results, updateResults] = useState([]);
@@ -11,8 +11,8 @@ export default function SongSearch(props) {
     const queryParameters = {
       track: document.getElementById('searchTitle').value,
       artist: document.getElementById('searchArtist').value,
-      album: document.getElementById('searchAlbum').value
-    }
+      album: document.getElementById('searchAlbum').value,
+    };
 
     const queryString = [];
 
@@ -20,9 +20,9 @@ export default function SongSearch(props) {
       if (queryParameters[property] !== '') {
         queryString.push(property.concat(':'.concat(queryParameters[property])));
       }
-    })
+    });
+
     const query = queryString.join(' ').replace(/ /g, '+');
-    
     fetch('/api/call/search?query='.concat(query)).then((res) => res.json()).then((res) => {
       const searchResults = [];
 
@@ -31,7 +31,7 @@ export default function SongSearch(props) {
 
         ele.artists.forEach((artist) => {
           artistNames.push(artist.name);
-        })
+        });
 
         const song = {
           name: ele.name,
@@ -40,21 +40,22 @@ export default function SongSearch(props) {
           albumImg: ele.album.images[0].url,
           id: ele.id,
           uri: ele.uri,
-        }
+        };
+
         console.log(song);
         searchResults.push(song);
-      })
-      if (searchResults.length !== 0) updateResults(searchResults)
+      });
+
+      if (searchResults.length !== 0) updateResults(searchResults);
       else updateResults([]);
-    })
+    });
   }
 
-  
   const tracks = [];
 
-  for (let i = 0; i < results.length; i++) {
+  for (let i = 0; i < results.length; i += 1) {
     const getAdvanced = () => {
-      const id = results[i].id;
+      const { id } = results[i];
       fetch('/api/call/audioFeatures?id=' + id).then((res) => res.json()).then((res) => {
         console.log('from server', res);
         props.setData(res);

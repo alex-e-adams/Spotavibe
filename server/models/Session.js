@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 /**
  * n.b. email does not have to be unique in the case that
- * the user signs in to Song Seeking Devil Chicken on multiple
+ * the user signs in to Spotavibe on multiple
  * devices.
  */
 const sessionSchema = new Schema({

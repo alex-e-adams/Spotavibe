@@ -6,6 +6,7 @@ const Session = require('../models/Session');
 require('dotenv').config();
 
 const spotifyAPIcontroller = require('../controllers/spotifyAPIcontroller');
+
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
 const redirectUri = `${process.env.BASE_URL}/api/authenticate`;
@@ -18,7 +19,7 @@ const router = express.Router();
  * @returns {Object}
  * Based on the "code" and "state" parameters, which are
  * derived from query parameters of the redirect link after a user signs in with Spotify.
- * Retrieves an access and refresh token from Spotify so that the user of Song Seeking Devil Chicken
+ * Retrieves an access and refresh token from Spotify so that the user of Spotavibe
  * can interact with the Spotify API.
  */
 async function getAccessToken(code, state) {
@@ -91,13 +92,15 @@ router.get('/', async (req, res) => {
       refToken: refreshToken,
     });
 
-    // Instantiate a spotify-web-api-node object with user credentials and store for future API calls
-    const auth = { clientId: process.env.CLIENT_ID, clientSecret: process.env.CLIENT_SECRET, redirectUri: redirectUri };
+    // Instantiate a spotify-web-api-node object with credentials and store for future API calls
+    const auth = {
+      clientId: process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
+      redirectUri,
+    };
+
     spotifyAPIcontroller.createSession(newSession.id, auth);
     spotifyAPIcontroller.invokeSession(newSession.id).setAccessToken(accessToken);
-    
-    // const output = await spotifyAPIcontroller.invokeSession(newSession.id).getMe();
-    // console.log(output);
 
     res.cookie('session-id', newSession.id, {
       /**

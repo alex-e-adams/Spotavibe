@@ -37,7 +37,7 @@ export default function App() {
   const loggedInLinks = (
     <>
       <Link to="/profile">Profile</Link>
-      <Link to="/songsearch">Song Search</Link>
+      <Link to="/songsearch">Search</Link>
       <a href="#" onClick={logOut}>Sign Out</a>
     </>
   );
@@ -47,13 +47,13 @@ export default function App() {
       <div className="navBarContainer">
         <div className="navBar">
           <img
-            src="img/DevilChickenWithHeadphones.jpg"
+            src="img/spotavibe-logo.png"
             alt="Song Seeking Devil Chicken"
             style={{
-              borderRadius: '100%',
-              border: 'solid',
+              // borderRadius: '5%',
+              // border: 'solid',
               borderColor: '#0e8a3d',
-              borderWidth: '3px',
+              borderWidth: '1px',
               height: '4em',
               width: '4em',
               marginRight: 'auto',

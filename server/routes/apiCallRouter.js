@@ -1,6 +1,6 @@
 const express = require('express');
 const axios = require('axios');
-const Session = require('../models/Session')
+const Session = require('../models/Session');
 
 const router = express.Router();
 const SAPI = require('../controllers/spotifyAPIcontroller');
@@ -81,14 +81,14 @@ router.get('/myPlaylists', async (req, res, next) => {
 
 async function startPlayback(deviceId, contextUri, authToken) {
   const data = {
-    uris: [contextUri]
-  }
+    uris: [contextUri],
+  };
   console.log(data);
   await axios.put(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, data, {
     headers: {
       Authorization: `Bearer ${authToken}`,
       'Content-Type': 'application/json',
-    }
+    },
   });
   // const response = await axios.post(tokenUrl, data, {
   //   headers: {
@@ -104,9 +104,9 @@ router.put('/playsong', async (req, res, next) => {
   console.log('Playing song...');
   const data = req.body;
   const { context_uri, device_id } = data;
-  await startPlayback(device_id, context_uri, authToken)
+  await startPlayback(device_id, context_uri, authToken);
   res.send('OK');
-})
+});
 // router.get('/myRecentSongs', async (req, res, next) => {
 //   console.log('hello, you made it to /myRecentSongs');
 //   const id = req.cookies['session-id'];
