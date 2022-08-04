@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 // import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 import LandingGraphic from './components/LandingGraphic';
@@ -6,22 +7,27 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './containers/NavBar';
 
 export default function App() {
-  const [loggedIn, setLoginStatus] = useState(false);
+  const [loggedIn, setLoginStatus] = useState<boolean>(false);
   const [token, setToken] = useState(undefined);
   
-  const getAuthStatus = async () => fetch('/api/checkAuth')
-    .then((res) => res.json())
-    .then((res) => {
-      if (res.authenticated === true) {
-        return res;
+  const checkAuthStatus = async() => {
+    try {
+      const res = await axios.get('/api/checkAuth')
+      const { authenticated } = res.data;
+
+      if (authenticated === true) {
+        return res.data;
       }
+
       return false;
-    })
-    .catch(() => false);
+    } catch (error) {
+      return false;
+    }
+  }
 
   useEffect(() => {
     if (!loggedIn) {
-      getAuthStatus().then((res) => {
+      checkAuthStatus().then((res) => {
         setLoginStatus(res.authenticated);
         setToken(res.accessToken);
       });
@@ -30,7 +36,7 @@ export default function App() {
 
   const element = (
     <Box className="App">
-      <NavBar />
+      <NavBar loggedIn />
       <LandingGraphic />
     </Box>
   );

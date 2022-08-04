@@ -6,7 +6,8 @@
     "noImplicitAny": true,
   },
   "include": [
-    "client/**/*", // defaults to find all .ts / .tsx / .d.ts files inside of the src folder
+    "client/**/*",
+    "server/**/*",
     "custom.d.ts"
   ]
 }
