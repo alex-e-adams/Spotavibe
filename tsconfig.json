@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+  },
+  "include": [
+    "client/**/*", // defaults to find all .ts / .tsx / .d.ts files inside of the src folder
+    "custom.d.ts"
+  ]
+}
