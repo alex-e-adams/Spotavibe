@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import PropTypes, { InferProps } from 'prop-types';
 import axios from 'axios';
 // Import MUI components
@@ -12,6 +13,7 @@ import {
 export default function SpotifyAvatar({ setLoginStatus }: InferProps<typeof SpotifyAvatar.propTypes>) {
   const [avatarURL, setAvatarURL] = useState<string>('');
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  let navigate = useNavigate();
 
   // Logic for avatar menu.
   const open = Boolean(anchorEl);
@@ -26,7 +28,8 @@ export default function SpotifyAvatar({ setLoginStatus }: InferProps<typeof Spot
     try {
       const res = await axios.get('/api/logout');
       const { authenticated } = res.data;
-      handleClose()
+      handleClose();
+      navigate('/');
       setLoginStatus(authenticated);
     } catch (error) {
       console.log(error);

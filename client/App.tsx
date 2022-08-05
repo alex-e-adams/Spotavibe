@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 // import { Outlet, Link, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Box } from '@mui/material';
 import LandingGraphic from './components/LandingGraphic';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './containers/NavBar';
 
 export default function App() {
@@ -34,13 +34,24 @@ export default function App() {
     }
   });
 
-  // console.log(loggedIn);
-
   const element = (
-    <Box className="App">
-      <NavBar loggedIn={loggedIn} setLoginStatus={setLoginStatus} />
-      <LandingGraphic />
-    </Box>
+    <BrowserRouter>
+      <Box className="App">
+        <NavBar loggedIn={loggedIn} setLoginStatus={setLoginStatus} />
+          <Routes>
+            <Route path="/" element={<LandingGraphic />} />
+            <Route path="/profile" element={<></>} />
+            <Route
+              path="*"
+              element={(
+                <div className="not-found">
+                  <p>Theres nothing here!</p>
+                </div>
+              )}
+            />
+          </Routes>
+      </Box>
+    </BrowserRouter>
   );
 
   return element;

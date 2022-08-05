@@ -73,21 +73,21 @@ root.render(
 // const root = createRoot(document.getElementById('root'));
 
 // root.render(
-//   <BrowserRouter>
-//     <Routes>
-//       <Route path="/" element={<App />}>
-//         <Route path="home" element={<Home />} />
-//         <Route path="songsearch" element={<SearchContainer />} />
-//         <Route path="profile" element={<ProfileContainer />} />
-//         <Route
-//           path="*"
-//           element={(
-//             <div className="notFound">
-//               <p>Theres nothing here!</p>
-//             </div>
-//           )}
-//         />
-//       </Route>
-//     </Routes>
-//   </BrowserRouter>,
+  // <BrowserRouter>
+  //   <Routes>
+  //     <Route path="/" element={<App />}>
+  //       <Route path="home" element={<Home />} />
+  //       <Route path="songsearch" element={<SearchContainer />} />
+  //       <Route path="profile" element={<ProfileContainer />} />
+  //       <Route
+  //         path="*"
+  //         element={(
+  //           <div className="notFound">
+  //             <p>Theres nothing here!</p>
+  //           </div>
+  //         )}
+  //       />
+  //     </Route>
+  //   </Routes>
+  // </BrowserRouter>,
 // );
