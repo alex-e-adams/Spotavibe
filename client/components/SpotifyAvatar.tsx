@@ -8,7 +8,15 @@ import {
 } from '@mui/material';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 
-export default function Logout({ setLoginStatus }: InferProps<typeof Logout.propTypes>) {  
+export default function Logout({ setLoginStatus }: InferProps<typeof Logout.propTypes>) {
+    // const logOut = async () => {
+  //   fetch('/api/logout').then((res) => res.json()).then((res) => {
+  //     setLoginStatus(res.authenticated);
+  //     nav('/home');
+  //   }).catch((err) => console.log(err));
+  // }
+
+  
   const handleLogout = async () => {
     try {
       const res = await axios.get('/api/logout');

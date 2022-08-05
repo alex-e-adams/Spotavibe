@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes, { InferProps } from 'prop-types';
+import SpotifyAvatar from '../components/SpotifyAvatar'
 import Login from '../components/Login';
 import Logout from '../components/Logout'
 // Import MUI components
@@ -8,19 +10,27 @@ import {
   Typography,
 } from '@mui/material';
 
-type NavBarProps = {
-  loggedIn: boolean,
-}
-
-export default function NavBar({ loggedIn }: NavBarProps) {
+export default function NavBar({ loggedIn, setLoginStatus }: InferProps<typeof NavBar.propTypes>) {
   return (
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Spotavibe
         </Typography>
-        {loggedIn ? <Logout /> : <Login />}
+        {loggedIn ? 
+          <>
+            <SpotifyAvatar />
+            <Logout setLoginStatus={setLoginStatus} />
+          </> 
+          : <Login />
+        }
       </Toolbar>
     </AppBar>
   );
 }
+
+// TODO: Should loggedIn be required?
+NavBar.propTypes = {
+  loggedIn: PropTypes.bool,
+  setLoginStatus: PropTypes.func.isRequired,
+};

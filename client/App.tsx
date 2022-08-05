@@ -10,7 +10,7 @@ export default function App() {
   const [loggedIn, setLoginStatus] = useState<boolean>(false);
   const [token, setToken] = useState(undefined);
   
-  const checkAuthStatus = async() => {
+  const checkAuthStatus = async () => {
     try {
       const res = await axios.get('/api/checkAuth')
       const { authenticated } = res.data;
@@ -34,9 +34,11 @@ export default function App() {
     }
   });
 
+  // console.log(loggedIn);
+
   const element = (
     <Box className="App">
-      <NavBar loggedIn />
+      <NavBar loggedIn={loggedIn} setLoginStatus={setLoginStatus} />
       <LandingGraphic />
     </Box>
   );
