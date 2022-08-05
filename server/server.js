@@ -83,12 +83,8 @@ app.use((err, req, res, next) => {
     status: 400,
     message: { err: 'An error occurred' },
   };
-  /**
-   * TODO:
-   * confirm that we are using object destructuring to replace of Object.assign() correctly
-   */
-  const errorObj = { ...defaultErr, ...err }; // Object.assign({}, defaultErr, err);
-  console.log(errorObj.log);
+
+  const errorObj = { ...defaultErr, ...err };
   return res.status(errorObj.status).json(errorObj.message);
 });
 

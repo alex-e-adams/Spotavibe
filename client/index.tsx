@@ -26,9 +26,28 @@ export const theme = createTheme({
       default: '#141414',
       paper: '#1c1c1c',
     },
+    text: {
+      primary: '#fff',
+    }
   },
 });
 
+theme.components = {
+  MuiTypography: {
+    defaultProps: {
+      style: {
+        color: theme.palette.text.primary
+      }
+    }
+  },
+  MuiMenuItem: {
+    defaultProps: {
+      style: {
+        color: theme.palette.text.primary,
+      }
+    }
+  }
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

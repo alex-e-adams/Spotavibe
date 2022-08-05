@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes, { InferProps } from 'prop-types';
 import SpotifyAvatar from '../components/SpotifyAvatar'
 import Login from '../components/Login';
-import Logout from '../components/Logout'
 // Import MUI components
 import {
   Toolbar,
@@ -17,10 +16,9 @@ export default function NavBar({ loggedIn, setLoginStatus }: InferProps<typeof N
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Spotavibe
         </Typography>
-        {loggedIn ? 
+        { loggedIn ? 
           <>
-            <SpotifyAvatar />
-            <Logout setLoginStatus={setLoginStatus} />
+            <SpotifyAvatar setLoginStatus={setLoginStatus}/>
           </> 
           : <Login />
         }

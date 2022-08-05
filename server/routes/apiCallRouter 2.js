@@ -8,9 +8,7 @@ const SAPI = require('../controllers/spotifyAPIcontroller');
 router.get('/me', async (req, res, next) => {
   console.log('hello, you made it to /me');
   const id = req.cookies['session-id'];
-  console.log('id:', id);
   res.locals.body = await SAPI.invokeSession(id).getMe();
-  console.log(res.locals.body);
   return next();
 });
 

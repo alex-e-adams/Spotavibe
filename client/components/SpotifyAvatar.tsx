@@ -1,46 +1,92 @@
-import React from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import PropTypes, { InferProps } from 'prop-types';
+import axios from 'axios';
 // Import MUI components
 import {
-  IconButton,
-  Tooltip,
+  Avatar,
+  Menu,
+  MenuItem,
+  IconButton
 } from '@mui/material';
-import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 
-export default function Logout({ setLoginStatus }: InferProps<typeof Logout.propTypes>) {
-    // const logOut = async () => {
-  //   fetch('/api/logout').then((res) => res.json()).then((res) => {
-  //     setLoginStatus(res.authenticated);
-  //     nav('/home');
-  //   }).catch((err) => console.log(err));
-  // }
+export default function SpotifyAvatar({ setLoginStatus }: InferProps<typeof SpotifyAvatar.propTypes>) {
+  const [avatarURL, setAvatarURL] = useState<string>('');
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
-  
+  // Logic for avatar menu.
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  // Logic for handling logout on avatar menu.
   const handleLogout = async () => {
     try {
       const res = await axios.get('/api/logout');
       const { authenticated } = res.data;
-      console.log(authenticated);
+      handleClose()
       setLoginStatus(authenticated);
     } catch (error) {
       console.log(error);
     }
-
   };
 
-  return (
-    <Tooltip title="Logout">
-      <IconButton 
-        color="inherit"
-        onClick={handleLogout}
-      >
-        <LogoutRoundedIcon />
-      </IconButton>
-    </Tooltip>
-  );
-}
+  // Logic for loading avatar.
+  async function getData() {
+    return fetch('/api/call/me').then((res) => res.json()).then((res) => {
+      return res;
+    })
+  }
+  useEffect(() => {
+    getData().then((res) => {
+      setAvatarURL(res.body.images[0].url);
+    });
+  })
 
-Logout.propTypes = {
+  return ( 
+    <>
+      { 
+      avatarURL === ''
+      ? 
+      <Avatar alt='...' src={'../assets/loading-avatar.svg'} /> 
+      : 
+      <>
+        <IconButton 
+          id="avatar-button"
+          size="small"
+          aria-controls={open ? 'avatar-menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
+          onClick={handleClick}
+        >
+          <Avatar 
+            alt='me'
+            src={avatarURL}
+          />
+        </IconButton>
+        <Menu
+          id="avatar-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            'aria-labelledby': 'avatar-menu-button',
+          }}
+        >
+          <MenuItem 
+            onClick={handleLogout}
+          >
+            Logout
+          </MenuItem>
+        </Menu>
+      </>
+      }
+    </>
+  );
+};
+
+SpotifyAvatar.propTypes = {
   setLoginStatus: PropTypes.func.isRequired,
 };

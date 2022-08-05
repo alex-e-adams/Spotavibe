@@ -1,10 +1,9 @@
 import React from 'react';
 // Import MUI components
 import {
-  IconButton,
+  Button,
   Tooltip,
 } from '@mui/material';
-import LoginRoundedIcon from '@mui/icons-material/LoginRounded';
 
 export default function Login() {
   // TODO: Figure out a better way to store variables like this.
@@ -42,12 +41,12 @@ export default function Login() {
 
   return (
     <Tooltip title="Login with Spotify">
-      <IconButton 
+      <Button 
         color="inherit"
         onClick={handleLogin}
       >
-        <LoginRoundedIcon />
-      </IconButton>
+        Login
+      </Button>
     </Tooltip>
   );
 }
