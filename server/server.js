@@ -24,9 +24,9 @@ const controllers = require('./controllers/controllers');
 // require routes
 const loginRoute = require('./routes/loginRoute');
 const logoutRoute = require('./routes/logoutRoute');
-const oauthRoute = require('./routes/oauthRoute');
+const OAuthRoute = require('./routes/OAuthRoute');
 const checkAuthRoute = require('./routes/checkAuthRoute');
-const apiCallRouter = require('./routes/apiCallRouter');
+const APICallRoute = require('./routes/APICallRoute');
 
 /**
  * Handles requests when user logs in to Song Seeking Devil Chicken.
@@ -43,13 +43,13 @@ app.use('/api/logout', logoutRoute);
 /**
  * Handles API calls once users are authenticated
  */
-app.use('/api/call', apiCallRouter, (req, res) => res.json(res.locals.body));
+app.use('/api/call', APICallRoute, (req, res) => res.json(res.locals.body));
 
 /**
  * Once a user logs in, they are redirected here.
  * User is given an access and refresh token here so that they can use the Spotify API.
  */
-app.use('/api/authenticate', oauthRoute);
+app.use('/api/authenticate', OAuthRoute);
 
 /**
  * Every time the index.html page is rendered, a get request is sent here.

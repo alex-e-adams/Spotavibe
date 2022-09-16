@@ -112,7 +112,7 @@ router.get('/', async (req, res) => {
       maxAge: (3600 * 1000),
       httpOnly: true,
     });
-    res.redirect('http://localhost:9000/profile');
+    res.redirect('http://localhost:9000/explore');
   }
 });
 

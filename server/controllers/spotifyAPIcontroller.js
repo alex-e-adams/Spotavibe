@@ -18,7 +18,6 @@ const spotifyAPI = { sessions: {} };
  * developers.spotify.com.
  */
 spotifyAPI.createSession = (sessionId, credentials) => {
-  console.log(`creating SAPI for ${sessionId}`);
   spotifyAPI.sessions[sessionId] = new SAPI(credentials);
   return null;
 };
@@ -29,7 +28,6 @@ spotifyAPI.createSession = (sessionId, credentials) => {
  * Deletes a SAPI object from memory when a user signs out.
  */
 spotifyAPI.deleteSession = (sessionId) => {
-  console.log(`deleting SAPI for ${sessionId}`);
   delete spotifyAPI.sessions[sessionId];
   return null;
 };
@@ -40,9 +38,6 @@ spotifyAPI.deleteSession = (sessionId) => {
  * Returns a user's personal SAPI object so that they can make a
  * request to the Spotify API via the Node.js Spotify wrapper.
  */
-spotifyAPI.invokeSession = (sessionId) => {
-  console.log(`invoking SAPI for ${sessionId}`);
-  return spotifyAPI.sessions[sessionId];
-};
+spotifyAPI.invokeSession = (sessionId) => spotifyAPI.sessions[sessionId];
 
 module.exports = spotifyAPI;

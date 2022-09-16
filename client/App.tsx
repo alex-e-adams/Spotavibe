@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Box } from '@mui/material';
 import LandingGraphic from './components/LandingGraphic';
 import NavBar from './containers/NavBar';
+import Explore from './containers/Explore';
 
 export default function App() {
   const [loggedIn, setLoginStatus] = useState<boolean>(false);
@@ -36,11 +37,16 @@ export default function App() {
 
   const element = (
     <BrowserRouter>
-      <Box className="App">
+      <Box className="App"
+        sx={{
+          width: '100vw',
+          height: '100vh'
+        }}
+      >
         <NavBar loggedIn={loggedIn} setLoginStatus={setLoginStatus} />
           <Routes>
             <Route path="/" element={<LandingGraphic />} />
-            <Route path="/profile" element={<></>} />
+            <Route path="/explore" element={<Explore />} />
             <Route
               path="*"
               element={(

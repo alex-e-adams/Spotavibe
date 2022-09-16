@@ -6,18 +6,13 @@ const router = express.Router();
 const SAPI = require('../controllers/spotifyAPIcontroller');
 
 router.get('/me', async (req, res, next) => {
-  console.log('hello, you made it to /me');
   const id = req.cookies['session-id'];
-  console.log('id:', id);
   res.locals.body = await SAPI.invokeSession(id).getMe();
-  console.log(res.locals.body);
   return next();
 });
 
 router.get('/search', async (req, res, next) => {
-  console.log('hello, you made it to /search');
   const id = req.cookies['session-id'];
-  // const { query } = req.params;
   const { query } = req.query;
   if (!query) {
     res.locals.body = [];
@@ -31,10 +26,7 @@ router.get('/search', async (req, res, next) => {
    */
   res.locals.body = await SAPI.invokeSession(id).searchTracks(query)
     .then((response) => response.body.tracks.items);
-  // console.log(res.locals.body);
-  if (res.locals.body.length > 5) {
-    res.locals.body = res.locals.body.slice(0, 5);
-  }
+
   return next();
 });
 

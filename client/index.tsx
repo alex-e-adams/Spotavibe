@@ -28,7 +28,7 @@ export const theme = createTheme({
     },
     text: {
       primary: '#fff',
-    }
+    },
   },
 });
 
@@ -44,9 +44,10 @@ theme.components = {
     defaultProps: {
       style: {
         color: theme.palette.text.primary,
+        fontSize: '0.8rem'
       }
     }
-  }
+  },
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
